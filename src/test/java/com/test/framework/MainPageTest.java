@@ -48,7 +48,11 @@ public class MainPageTest extends BaseTest {
     }
 
     @Test
-    public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException {
+    public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
+
+        BillingAddress billingAddress = new BillingAddress();
+        InputStream is = getClass().getClassLoader().getResourceAsStream("billingAddress.json");
+        billingAddress = JacksonUtils.deserializeJson(is, billingAddress);
 
         StorePage storePage = new HomePage(driver)
                 .load()
@@ -66,12 +70,7 @@ public class MainPageTest extends BaseTest {
         Thread.sleep(5000);
         checkOutpage
                 .login("user", "123")
-                .enterTextIntoNameField("demo")
-                .enterTextIntoLastNameField("user")
-                .enterTextIntoAddressField("San Francisco")
-                .enterTextIntocityField("San Francisco")
-                .enterTextIntoPostCodeField("94188")
-                .enterTextIntoEmailField("example@example.com")
+                .setBillingAddress(billingAddress)
                 .clickOnPlaceOrderBtn();
 
         Thread.sleep(3000);
