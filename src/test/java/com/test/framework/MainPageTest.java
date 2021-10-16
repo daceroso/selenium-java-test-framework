@@ -16,13 +16,23 @@ public class MainPageTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
 
-        BillingAddress billingAddress = new BillingAddress();
-        billingAddress.setFirstName("demo");
-        billingAddress.setFirstName("user");
-        billingAddress.setAddressLineOne("San Francisco");
-        billingAddress.setCity("San Francisco");
-        billingAddress.setPostalCode("94188");
-        billingAddress.setEmail("example@example.com");
+//        BillingAddress billingAddress = new BillingAddress();
+//        billingAddress.setFirstName("demo")
+//                .setLastName("user")
+//                .setAddressLineOne("San Francisco")
+//                .setCity("San Francisco")
+//                .setPostalCode("94188")
+//                .setEmail("example@example.com");
+
+
+        BillingAddress billingAddress = new BillingAddress(
+                "demo",
+                "user",
+                "San Francisco",
+                "San Francisco",
+                "94188",
+                "example@example.com"
+        );
 
 
         StorePage storePage = new HomePage(driver)
