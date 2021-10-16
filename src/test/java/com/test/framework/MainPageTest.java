@@ -7,7 +7,6 @@ import com.test.framework.pom.pages.CheckOutPage;
 import com.test.framework.pom.pages.HomePage;
 import com.test.framework.pom.pages.StorePage;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,13 +15,10 @@ public class MainPageTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
 
-        //GIVEN
-        driver.get("https://askomdch.com");
-        HomePage homePage = new HomePage(driver);
-
-        //WHEN
-        StorePage storePage = homePage.navigateToStoreUsingMenu();
-        storePage.search("Blue");
+        StorePage storePage = new HomePage(driver)
+                .load()
+                .navigateToStoreUsingMenu()
+                .search("Blue");
         assertThat(storePage.getTitle()).contains("Blue");
 
         storePage.clickOnAddToCartBtn("Blue Shoes");
@@ -40,7 +36,7 @@ public class MainPageTest extends BaseTest {
                 .clickOnPlaceOrderBtn();
         Thread.sleep(5000);
 
-        //THEN
+
         assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
 
 
@@ -49,14 +45,10 @@ public class MainPageTest extends BaseTest {
     @Test
     public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException {
 
-        //GIVEN
-        driver.get("https://askomdch.com");
-        HomePage homePage = new HomePage(driver);
-
-
-        //WHEN
-        StorePage storePage = homePage.navigateToStoreUsingMenu();
-        storePage.search("Blue");
+        StorePage storePage = new HomePage(driver)
+                .load()
+                .navigateToStoreUsingMenu()
+                .search("Blue");
         assertThat(storePage.getTitle()).contains("Blue");
 
         storePage.clickOnAddToCartBtn("Blue Shoes");
@@ -79,7 +71,6 @@ public class MainPageTest extends BaseTest {
 
         Thread.sleep(3000);
 
-        //THEN
         assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
     }
 }
