@@ -7,32 +7,21 @@ import com.test.framework.pom.pages.CartPage;
 import com.test.framework.pom.pages.CheckOutPage;
 import com.test.framework.pom.pages.HomePage;
 import com.test.framework.pom.pages.StorePage;
+import com.test.framework.pom.utils.JacksonUtils;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MainPageTest extends BaseTest {
 
     @Test
-    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
-
-//        BillingAddress billingAddress = new BillingAddress();
-//        billingAddress.setFirstName("demo")
-//                .setLastName("user")
-//                .setAddressLineOne("San Francisco")
-//                .setCity("San Francisco")
-//                .setPostalCode("94188")
-//                .setEmail("example@example.com");
-
-
-        BillingAddress billingAddress = new BillingAddress(
-                "demo",
-                "user",
-                "San Francisco",
-                "San Francisco",
-                "94188",
-                "example@example.com"
-        );
+    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
+        BillingAddress billingAddress = new BillingAddress();
+        InputStream is = getClass().getClassLoader().getResourceAsStream("billingAddress.json");
+        billingAddress = JacksonUtils.deserializeJson(is, billingAddress);
 
 
         StorePage storePage = new HomePage(driver)
