@@ -23,7 +23,7 @@ public class MainPageTest extends BaseTest {
         StorePage storePage = homePage.clickStoreMenuLink();
         storePage.search("Blue");
         assertThat(storePage.getTitle()).contains("Blue");
-        storePage.clickOnAddToCartBtn();
+        storePage.clickOnAddToCartBtn("Blue Shoes");
 
 
         driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
