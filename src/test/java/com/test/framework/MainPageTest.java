@@ -30,26 +30,15 @@ public class MainPageTest extends BaseTest {
         assertThat(cartPage.getProductName()).isEqualTo("Blue Shoes");
 
         CheckOutPage checkOutpage = cartPage.clickOnCheckOutBtn();
-
-
-
-
-
-
-
-        driver.findElement(By.id("billing_first_name")).sendKeys("demo");
-        driver.findElement(By.id("billing_last_name")).sendKeys("user");
-        driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
-        driver.findElement(By.id("billing_city")).sendKeys("San Francisco");
-        driver.findElement(By.id("billing_postcode")).sendKeys("94188");
-        driver.findElement(By.id("billing_email")).sendKeys("example@example.com");
-        driver.findElement(By.id("place_order")).click();
-
+        checkOutpage.enterTextIntoNameField("demo")
+                .enterTextIntoLastNameField("user")
+                .enterTextIntoAddressField("San Francisco")
+                .enterTextIntocityField("San Francisco")
+                .enterTextIntoPostCodeField("94188")
+                .enterTextIntoEmailField("example@example.com")
+                .clickOnPlaceOrderBtn();
         Thread.sleep(5000);
-
-        assertThat(driver.findElement(By.cssSelector(".woocommerce-notice")).getText()).isEqualTo("Thank you. Your order has been received.");
-
-
+        assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
 
 
     }
