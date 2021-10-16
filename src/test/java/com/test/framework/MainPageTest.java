@@ -11,7 +11,6 @@ import com.test.framework.pom.utils.JacksonUtils;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,9 +18,8 @@ public class MainPageTest extends BaseTest {
 
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
-        BillingAddress billingAddress = new BillingAddress();
-        InputStream is = getClass().getClassLoader().getResourceAsStream("billingAddress.json");
-        billingAddress = JacksonUtils.deserializeJson(is, billingAddress);
+
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
 
 
         StorePage storePage = new HomePage(driver)
@@ -50,9 +48,7 @@ public class MainPageTest extends BaseTest {
     @Test
     public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
 
-        BillingAddress billingAddress = new BillingAddress();
-        InputStream is = getClass().getClassLoader().getResourceAsStream("billingAddress.json");
-        billingAddress = JacksonUtils.deserializeJson(is, billingAddress);
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
 
         StorePage storePage = new HomePage(driver)
                 .load()
