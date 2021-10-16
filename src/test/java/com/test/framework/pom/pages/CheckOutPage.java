@@ -15,39 +15,50 @@ public class CheckOutPage extends BasePage {
     private final By placeOrderBtn = By.id("place_order");
     private final By successfulMessage = By.cssSelector(".woocommerce-notice");
 
+    private final By clickHeroToLoginLink = By.className("showlogin");
+    private final By username = By.id("username");
+    private final By password = By.id("password");
+    private final By loginBtn = By.name("login");
+
 
     public CheckOutPage(WebDriver driver) {
         super(driver);
     }
 
-    public CheckOutPage enterTextIntoNameField(String text){
+    public CheckOutPage enterTextIntoNameField(String text) {
+        driver.findElement(billingFirstName).clear();
         driver.findElement(billingFirstName).sendKeys(text);
         return this;
     }
 
 
     public CheckOutPage enterTextIntoLastNameField(String text) {
+        driver.findElement(billingLastName).clear();
         driver.findElement(billingLastName).sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntoAddressField(String text) {
+        driver.findElement(billingAddress).clear();
         driver.findElement(billingAddress).sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntocityField(String text) {
+        driver.findElement(billingCity).clear();
         driver.findElement(billingCity).sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntoPostCodeField(String text) {
+        driver.findElement(billingPostcode).clear();
         driver.findElement(billingPostcode).sendKeys(text);
         return this;
     }
 
 
     public CheckOutPage enterTextIntoEmailField(String text) {
+        driver.findElement(billingEmail).clear();
         driver.findElement(billingEmail).sendKeys(text);
         return this;
     }
@@ -59,6 +70,33 @@ public class CheckOutPage extends BasePage {
 
     public String getNotice() {
         return driver.findElement(successfulMessage).getText();
+    }
+
+    public CheckOutPage clickOnLoginLink() {
+        driver.findElement(clickHeroToLoginLink).click();
+        return this;
+    }
+
+    public CheckOutPage enterTextIntoUsernameField(String text) {
+        driver.findElement(username).sendKeys(text);
+        return this;
+    }
+
+    public CheckOutPage enterTextIntoPasswordField(String text) {
+        driver.findElement(password).sendKeys(text);
+        return this;
+    }
+
+    public CheckOutPage clickOnLoginBtn() {
+        driver.findElement(loginBtn).click();
+        return this;
+
+    }
+
+    public CheckOutPage login(String username, String password) {
+        return enterTextIntoUsernameField(username)
+                .enterTextIntoPasswordField(password)
+                .clickOnLoginBtn();
     }
 
 
