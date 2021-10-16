@@ -2,6 +2,7 @@ package com.test.framework;
 
 
 import com.test.framework.pom.base.BaseTest;
+import com.test.framework.pom.pages.CartPage;
 import com.test.framework.pom.pages.HomePage;
 import com.test.framework.pom.pages.StorePage;
 import org.junit.Test;
@@ -16,7 +17,6 @@ public class MainPageTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
 
-
         driver.get("https://askomdch.com");
 
         HomePage homePage = new HomePage(driver);
@@ -24,17 +24,12 @@ public class MainPageTest extends BaseTest {
         storePage.search("Blue");
         assertThat(storePage.getTitle()).contains("Blue");
         storePage.clickOnAddToCartBtn("Blue Shoes");
-
-
-        driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
-        driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("Blue");
-        driver.findElement(By.cssSelector("button[value='Search']")).click();
-
-        assertThat(driver.findElement(By.cssSelector(".woocommerce-products-header__title.page-title")).getText()).contains("Blue");
-
-        driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
         Thread.sleep(5000);
-        driver.findElement(By.cssSelector("a[title='View cart']")).click();
+        CartPage cartPage = storePage.clickOnViewCart();
+
+
+
+
         assertThat(driver.findElement(By.cssSelector("td[class='product-name'] a")).getText()).isEqualTo("Blue Shoes");
 
         driver.findElement(By.cssSelector(".checkout-button")).click();
