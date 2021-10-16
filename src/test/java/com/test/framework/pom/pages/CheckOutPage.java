@@ -2,6 +2,7 @@ package com.test.framework.pom.pages;
 
 import com.test.framework.pom.base.BasePage;
 import com.test.framework.pom.objects.BillingAddress;
+import com.test.framework.pom.objects.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -103,9 +104,9 @@ public class CheckOutPage extends BasePage {
 
     }
 
-    public CheckOutPage login(String username, String password) {
-        return enterTextIntoUsernameField(username)
-                .enterTextIntoPasswordField(password)
+    public CheckOutPage login(User user) {
+        return enterTextIntoUsernameField(user.getUsername())
+                .enterTextIntoPasswordField(user.getPassword())
                 .clickOnLoginBtn();
     }
 

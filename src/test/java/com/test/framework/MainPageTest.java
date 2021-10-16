@@ -3,6 +3,8 @@ package com.test.framework;
 
 import com.test.framework.pom.base.BaseTest;
 import com.test.framework.pom.objects.BillingAddress;
+import com.test.framework.pom.objects.Product;
+import com.test.framework.pom.objects.User;
 import com.test.framework.pom.pages.CartPage;
 import com.test.framework.pom.pages.CheckOutPage;
 import com.test.framework.pom.pages.HomePage;
@@ -19,19 +21,21 @@ public class MainPageTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
 
+        String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
+        Product product = new Product(1215);
 
 
         StorePage storePage = new HomePage(driver)
                 .load()
                 .navigateToStoreUsingMenu()
-                .search("Blue");
-        assertThat(storePage.getTitle()).contains("Blue");
+                .search(searchFor);
+        assertThat(storePage.getTitle()).contains(searchFor);
 
-        storePage.clickOnAddToCartBtn("Blue Shoes");
+        storePage.clickOnAddToCartBtn(product.getName());
         Thread.sleep(5000);
         CartPage cartPage = storePage.clickOnViewCart();
-        assertThat(cartPage.getProductName()).isEqualTo("Blue Shoes");
+        assertThat(cartPage.getProductName()).isEqualTo(product.getName());
 
         CheckOutPage checkOutpage = cartPage
                 .checkout()
@@ -48,24 +52,28 @@ public class MainPageTest extends BaseTest {
     @Test
     public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
 
+        String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
+
+        Product product = new Product(1215);
+        User user = new User("user", "123");
 
         StorePage storePage = new HomePage(driver)
                 .load()
                 .navigateToStoreUsingMenu()
-                .search("Blue");
-        assertThat(storePage.getTitle()).contains("Blue");
+                .search(searchFor);
+        assertThat(storePage.getTitle()).contains(searchFor);
 
-        storePage.clickOnAddToCartBtn("Blue Shoes");
+        storePage.clickOnAddToCartBtn(product.getName());
         Thread.sleep(5000);
         CartPage cartPage = storePage.clickOnViewCart();
-        assertThat(cartPage.getProductName()).isEqualTo("Blue Shoes");
+        assertThat(cartPage.getProductName()).isEqualTo(product.getName());
 
         CheckOutPage checkOutpage = cartPage.checkout();
         checkOutpage.clickOnLoginLink();
         Thread.sleep(5000);
         checkOutpage
-                .login("user", "123")
+                .login(user)
                 .setBillingAddress(billingAddress)
                 .clickOnPlaceOrderBtn();
 
