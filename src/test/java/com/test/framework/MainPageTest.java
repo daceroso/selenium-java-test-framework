@@ -2,6 +2,7 @@ package com.test.framework;
 
 
 import com.test.framework.pom.base.BaseTest;
+import com.test.framework.pom.objects.BillingAddress;
 import com.test.framework.pom.pages.CartPage;
 import com.test.framework.pom.pages.CheckOutPage;
 import com.test.framework.pom.pages.HomePage;
@@ -15,6 +16,15 @@ public class MainPageTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
 
+        BillingAddress billingAddress = new BillingAddress();
+        billingAddress.setFirstName("demo");
+        billingAddress.setFirstName("user");
+        billingAddress.setAddressLineOne("San Francisco");
+        billingAddress.setCity("San Francisco");
+        billingAddress.setPostalCode("94188");
+        billingAddress.setEmail("example@example.com");
+
+
         StorePage storePage = new HomePage(driver)
                 .load()
                 .navigateToStoreUsingMenu()
@@ -26,13 +36,9 @@ public class MainPageTest extends BaseTest {
         CartPage cartPage = storePage.clickOnViewCart();
         assertThat(cartPage.getProductName()).isEqualTo("Blue Shoes");
 
-        CheckOutPage checkOutpage = cartPage.checkout();
-        checkOutpage.enterTextIntoNameField("demo")
-                .enterTextIntoLastNameField("user")
-                .enterTextIntoAddressField("San Francisco")
-                .enterTextIntocityField("San Francisco")
-                .enterTextIntoPostCodeField("94188")
-                .enterTextIntoEmailField("example@example.com")
+        CheckOutPage checkOutpage = cartPage
+                .checkout()
+                .setBillingAddress(billingAddress)
                 .clickOnPlaceOrderBtn();
         Thread.sleep(5000);
 

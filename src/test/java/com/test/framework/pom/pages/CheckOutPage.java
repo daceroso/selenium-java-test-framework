@@ -1,6 +1,7 @@
 package com.test.framework.pom.pages;
 
 import com.test.framework.pom.base.BasePage;
+import com.test.framework.pom.objects.BillingAddress;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -61,6 +62,15 @@ public class CheckOutPage extends BasePage {
         driver.findElement(billingEmail).clear();
         driver.findElement(billingEmail).sendKeys(text);
         return this;
+    }
+
+    public CheckOutPage setBillingAddress(BillingAddress billingAddress) {
+        return enterTextIntoNameField(billingAddress.getFirstName())
+                .enterTextIntoLastNameField(billingAddress.getLastName())
+                .enterTextIntoAddressField(billingAddress.getAddressLineOne())
+                .enterTextIntocityField(billingAddress.getCity())
+                .enterTextIntoPostCodeField(billingAddress.getPostalCode())
+                .enterTextIntoEmailField(billingAddress.getEmail());
     }
 
     public CheckOutPage clickOnPlaceOrderBtn() {
