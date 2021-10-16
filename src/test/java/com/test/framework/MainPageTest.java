@@ -21,6 +21,10 @@ public class MainPageTest extends BaseTest {
 
         HomePage homePage = new HomePage(driver);
         StorePage storePage = homePage.clickStoreMenuLink();
+        storePage.search("Blue");
+        assertThat(storePage.getTitle()).contains("Blue");
+        storePage.clickOnAddToCartBtn();
+
 
         driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
         driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("Blue");
