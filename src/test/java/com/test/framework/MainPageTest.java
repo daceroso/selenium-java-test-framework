@@ -3,6 +3,7 @@ package com.test.framework;
 
 import com.test.framework.pom.base.BaseTest;
 import com.test.framework.pom.pages.CartPage;
+import com.test.framework.pom.pages.CheckOutPage;
 import com.test.framework.pom.pages.HomePage;
 import com.test.framework.pom.pages.StorePage;
 import org.junit.Test;
@@ -18,21 +19,24 @@ public class MainPageTest extends BaseTest {
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
 
         driver.get("https://askomdch.com");
-
         HomePage homePage = new HomePage(driver);
         StorePage storePage = homePage.clickStoreMenuLink();
         storePage.search("Blue");
         assertThat(storePage.getTitle()).contains("Blue");
+
         storePage.clickOnAddToCartBtn("Blue Shoes");
         Thread.sleep(5000);
         CartPage cartPage = storePage.clickOnViewCart();
+        assertThat(cartPage.getProductName()).isEqualTo("Blue Shoes");
+
+        CheckOutPage checkOutpage = cartPage.clickOnCheckOutBtn();
 
 
 
 
-        assertThat(driver.findElement(By.cssSelector("td[class='product-name'] a")).getText()).isEqualTo("Blue Shoes");
 
-        driver.findElement(By.cssSelector(".checkout-button")).click();
+
+
         driver.findElement(By.id("billing_first_name")).sendKeys("demo");
         driver.findElement(By.id("billing_last_name")).sendKeys("user");
         driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
