@@ -1,6 +1,6 @@
-package com.test.framework.pom;
+package com.test.framework.pom.base;
 
-import com.test.framework.factory.DriverManager;
+import com.test.framework.pom.factory.DriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;

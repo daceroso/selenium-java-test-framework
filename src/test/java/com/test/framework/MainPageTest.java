@@ -1,7 +1,7 @@
 package com.test.framework;
 
 
-import com.test.framework.pom.BaseTest;
+import com.test.framework.pom.base.BaseTest;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
