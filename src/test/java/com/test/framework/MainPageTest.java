@@ -2,6 +2,8 @@ package com.test.framework;
 
 
 import com.test.framework.pom.base.BaseTest;
+import com.test.framework.pom.pages.HomePage;
+import com.test.framework.pom.pages.StorePage;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,10 @@ public class MainPageTest extends BaseTest {
 
 
         driver.get("https://askomdch.com");
+
+        HomePage homePage = new HomePage(driver);
+        StorePage storePage = homePage.clickStoreMenuLink();
+
         driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
         driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("Blue");
         driver.findElement(By.cssSelector("button[value='Search']")).click();
