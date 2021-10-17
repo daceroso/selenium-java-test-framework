@@ -5,17 +5,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
 public class DriverManager {
 
 
     public WebDriver initializeDriver() {
-        WebDriverManager.chromedriver().cachePath("Drivers").setup();
-       // WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
-        WebDriver driver = new ChromeDriver();
-       // WebDriver driver = new FirefoxDriver();
+        WebDriver driver;
+        String browser = System.getProperty("browser");
+        switch (browser) {
+            case "Chrome" -> {
+                WebDriverManager.chromedriver().cachePath("Drivers").setup();
+                driver = new ChromeDriver();
+            }
+            case "Firefox" -> {
+                WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
+                driver = new FirefoxDriver();
+            }
+            default -> throw new IllegalStateException("Invalid browser name: " + browser);
+        }
+
+        // WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
+
+        // WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
 //        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
