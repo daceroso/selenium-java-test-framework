@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MainPageTest extends BaseTest {
 
     @Test
-    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
+    public void guestCheckoutUsingDirectBankTransfer() throws IOException {
 
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
@@ -33,7 +33,6 @@ public class MainPageTest extends BaseTest {
         assertThat(storePage.getTitle()).contains(searchFor);
 
         storePage.clickOnAddToCartBtn(product.getName());
-        Thread.sleep(5000);
         CartPage cartPage = storePage.clickOnViewCart();
         assertThat(cartPage.getProductName()).isEqualTo(product.getName());
 
@@ -41,7 +40,6 @@ public class MainPageTest extends BaseTest {
                 .checkout()
                 .setBillingAddress(billingAddress)
                 .clickOnPlaceOrderBtn();
-        Thread.sleep(5000);
 
 
         assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
@@ -50,7 +48,7 @@ public class MainPageTest extends BaseTest {
     }
 
     @Test
-    public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
+    public void loginAndCheckoutUsingDirectBankTransfer() throws  IOException {
 
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
@@ -65,19 +63,18 @@ public class MainPageTest extends BaseTest {
         assertThat(storePage.getTitle()).contains(searchFor);
 
         storePage.clickOnAddToCartBtn(product.getName());
-        Thread.sleep(5000);
+
         CartPage cartPage = storePage.clickOnViewCart();
         assertThat(cartPage.getProductName()).isEqualTo(product.getName());
 
         CheckOutPage checkOutpage = cartPage.checkout();
         checkOutpage.clickOnLoginLink();
-        Thread.sleep(5000);
         checkOutpage
                 .login(user)
                 .setBillingAddress(billingAddress)
                 .clickOnPlaceOrderBtn();
 
-        Thread.sleep(3000);
+
 
         assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
     }

@@ -5,6 +5,15 @@ import com.test.framework.pom.objects.BillingAddress;
 import com.test.framework.pom.objects.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import java.time.Duration;
+import java.util.List;
+
+
 
 public class CheckOutPage extends BasePage {
 
@@ -21,6 +30,8 @@ public class CheckOutPage extends BasePage {
     private final By username = By.id("username");
     private final By password = By.id("password");
     private final By loginBtn = By.name("login");
+
+    private final By overlay = By.cssSelector(".blockUI.blockOverlay");
 
 
     public CheckOutPage(WebDriver driver) {
@@ -75,6 +86,15 @@ public class CheckOutPage extends BasePage {
     }
 
     public CheckOutPage clickOnPlaceOrderBtn() {
+        List<WebElement> overlays = driver.findElements(overlay);
+        System.out.println("OVERLAY SIZE: " + overlays.size());
+        if(overlays.size() > 0) {
+            new WebDriverWait(driver, 15).until(
+                    ExpectedConditions.invisibilityOfAllElements(overlays)
+            );
+            System.out.println("OVERLAY ARE INVISIBLE : ");
+
+        }
         driver.findElement(placeOrderBtn).click();
         return this;
     }
