@@ -1,6 +1,13 @@
 package com.test.framework.pom.base;
 
+import org.codehaus.groovy.transform.SourceURIASTTransformation;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class BasePage {
 
@@ -12,5 +19,20 @@ public class BasePage {
 
     public void load(String endPoint) {
         driver.get("https://askomdch.com" + endPoint);
+    }
+
+
+    public void waitForOverlaysToDissapear(By overlay) {
+        List<WebElement> overlays = driver.findElements(overlay);
+        System.out.println("OVERLAY SIZE: " + overlays.size());
+        if(overlays.size() > 0) {
+            new WebDriverWait(driver, 15).until(
+                    ExpectedConditions.invisibilityOfAllElements(overlays)
+            );
+            System.out.println("OVERLAY ARE INVISIBLE : ");
+
+        }else {
+            System.out.println("OVERLAY NOT FOUND");
+        }
     }
 }
