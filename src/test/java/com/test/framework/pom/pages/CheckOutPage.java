@@ -5,6 +5,8 @@ import com.test.framework.pom.objects.BillingAddress;
 import com.test.framework.pom.objects.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class CheckOutPage extends BasePage {
@@ -31,40 +33,46 @@ public class CheckOutPage extends BasePage {
     }
 
     public CheckOutPage enterTextIntoNameField(String text) {
-        driver.findElement(billingFirstName).clear();
-        driver.findElement(billingFirstName).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingFirstName));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
 
     public CheckOutPage enterTextIntoLastNameField(String text) {
-        driver.findElement(billingLastName).clear();
-        driver.findElement(billingLastName).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingLastName));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntoAddressField(String text) {
-        driver.findElement(billingAddress).clear();
-        driver.findElement(billingAddress).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingAddress));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntocityField(String text) {
-        driver.findElement(billingCity).clear();
-        driver.findElement(billingCity).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingCity));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntoPostCodeField(String text) {
-        driver.findElement(billingPostcode).clear();
-        driver.findElement(billingPostcode).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingPostcode));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
 
     public CheckOutPage enterTextIntoEmailField(String text) {
-        driver.findElement(billingEmail).clear();
-        driver.findElement(billingEmail).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingEmail));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
@@ -84,26 +92,31 @@ public class CheckOutPage extends BasePage {
     }
 
     public String getNotice() {
-        return driver.findElement(successfulMessage).getText();
+
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(successfulMessage)).getText();
     }
 
     public CheckOutPage clickOnLoginLink() {
-        driver.findElement(clickHeroToLoginLink).click();
+        wait.until(ExpectedConditions.elementToBeClickable(clickHeroToLoginLink)).click();
         return this;
     }
 
     public CheckOutPage enterTextIntoUsernameField(String text) {
-        driver.findElement(username).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(username));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
     public CheckOutPage enterTextIntoPasswordField(String text) {
-        driver.findElement(password).sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(password));
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
     public CheckOutPage clickOnLoginBtn() {
-        driver.findElement(loginBtn).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginBtn)).click();
         return this;
 
     }

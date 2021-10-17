@@ -3,6 +3,7 @@ package com.test.framework.pom.pages;
 import com.test.framework.pom.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class StorePage extends BasePage {
 
@@ -17,7 +18,7 @@ public class StorePage extends BasePage {
     }
 
     private StorePage enterTextInSearchField(String text) {
-        driver.findElement(searchField).sendKeys(text);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchField)).sendKeys(text);
         return this;
     }
 
@@ -26,12 +27,13 @@ public class StorePage extends BasePage {
         return this;
     }
     private StorePage clickOnSearchBtn(){
-        driver.findElement(searchBtn).click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchBtn)).click();
         return this;
     }
 
     public String getTitle() {
-        return driver.findElement(title).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
+
     }
 
 
@@ -46,7 +48,7 @@ public class StorePage extends BasePage {
     }
 
     public CartPage clickOnViewCart() {
-        driver.findElement(viewCartLink).click();
+        wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
         return new CartPage(driver);
     }
 

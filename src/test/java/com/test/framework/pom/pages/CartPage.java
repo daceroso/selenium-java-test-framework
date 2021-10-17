@@ -1,9 +1,9 @@
 package com.test.framework.pom.pages;
 
-import com.codeborne.selenide.conditions.Checked;
 import com.test.framework.pom.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage {
 
@@ -16,12 +16,12 @@ public class CartPage extends BasePage {
 
 
     public String getProductName() {
-        return driver.findElement(productName).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productName)).getText();
+
     }
 
     public CheckOutPage checkout() {
-        driver.findElement(checkOutBtn).click();
-
+        wait.until(ExpectedConditions.elementToBeClickable(checkOutBtn)).click();
         return new CheckOutPage(driver);
     }
 }

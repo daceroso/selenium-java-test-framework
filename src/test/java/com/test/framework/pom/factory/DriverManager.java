@@ -13,7 +13,7 @@ public class DriverManager {
         System.setProperty("webdriver.chrome.driver", "/home/daceros/Downloads/chromedriver_linux64/chromedriver");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
         return driver;
     }

@@ -30,7 +30,7 @@ public class MainPageTest extends BaseTest {
                 .load()
                 .navigateToStoreUsingMenu()
                 .search(searchFor);
-        assertThat(storePage.getTitle()).contains(searchFor);
+        assertThat(storePage.getTitle()).isEqualTo("Search results: “" + searchFor + "”");
 
         storePage.clickOnAddToCartBtn(product.getName());
         CartPage cartPage = storePage.clickOnViewCart();
@@ -60,7 +60,7 @@ public class MainPageTest extends BaseTest {
                 .load()
                 .navigateToStoreUsingMenu()
                 .search(searchFor);
-        assertThat(storePage.getTitle()).contains(searchFor);
+        assertThat(storePage.getTitle()).isEqualTo("Search results: “" + searchFor + "”");
 
         storePage.clickOnAddToCartBtn(product.getName());
 
