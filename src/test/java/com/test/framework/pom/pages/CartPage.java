@@ -24,7 +24,7 @@ public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, CartPage.class);
+        PageFactory.initElements(driver, this);
     }
 
 

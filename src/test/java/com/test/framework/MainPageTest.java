@@ -27,9 +27,8 @@ public class MainPageTest extends BaseTest {
 
         StorePage storePage = new HomePage(driver)
                 .load()
-                .navigateToStoreUsingMenu();
-        storePage.isLoaded();
-        storePage.search(searchFor);
+                .navigateToStoreUsingMenu()
+                .search(searchFor);
         assertThat(storePage.getTitle()).isEqualTo("Search results: “" + searchFor + "”");
 
         storePage.clickOnAddToCartBtn(product.getName());
