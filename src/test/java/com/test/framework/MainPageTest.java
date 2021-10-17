@@ -25,7 +25,6 @@ public class MainPageTest extends BaseTest {
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
 
-
         StorePage storePage = new HomePage(driver)
                 .load()
                 .navigateToStoreUsingMenu();
@@ -35,12 +34,12 @@ public class MainPageTest extends BaseTest {
 
         storePage.clickOnAddToCartBtn(product.getName());
         CartPage cartPage = storePage.clickOnViewCart();
-        cartPage.isLoaded();
         assertThat(cartPage.getProductName()).isEqualTo(product.getName());
 
         CheckOutPage checkOutpage = cartPage
                 .checkout()
                 .setBillingAddress(billingAddress)
+                .selectDirectBankTransfer()
                 .clickOnPlaceOrderBtn();
 
 
@@ -74,6 +73,7 @@ public class MainPageTest extends BaseTest {
         checkOutpage
                 .login(user)
                 .setBillingAddress(billingAddress)
+                .selectDirectBankTransfer()
                 .clickOnPlaceOrderBtn();
 
 

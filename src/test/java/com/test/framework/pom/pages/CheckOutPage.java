@@ -30,6 +30,7 @@ public class CheckOutPage extends BasePage {
     private final By stateDropDown = By.id("billing_state");
     private final By overlay = By.cssSelector(".blockUI.blockOverlay");
 
+    private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
 
     public CheckOutPage(WebDriver driver) {
         super(driver);
@@ -142,6 +143,14 @@ public class CheckOutPage extends BasePage {
         return enterTextIntoUsernameField(user.getUsername())
                 .enterTextIntoPasswordField(user.getPassword())
                 .clickOnLoginBtn();
+    }
+
+    public CheckOutPage selectDirectBankTransfer() {
+       WebElement element = wait.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioBtn));
+       if(!element.isSelected()) {
+           element.click();
+       }
+       return this;
     }
 
 
