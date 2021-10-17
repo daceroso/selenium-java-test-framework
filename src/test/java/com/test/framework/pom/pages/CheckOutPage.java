@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 
 public class CheckOutPage extends BasePage {
@@ -25,6 +26,8 @@ public class CheckOutPage extends BasePage {
     private final By password = By.id("password");
     private final By loginBtn = By.name("login");
 
+    private final By countryDropDown = By.id("billing_country");
+    private final By stateDropDown = By.id("billing_state");
     private final By overlay = By.cssSelector(".blockUI.blockOverlay");
 
 
@@ -44,6 +47,18 @@ public class CheckOutPage extends BasePage {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(billingLastName));
         element.clear();
         element.sendKeys(text);
+        return this;
+    }
+
+    public CheckOutPage selectCountry(String countryName) {
+        Select select = new Select(driver.findElement(countryDropDown));
+        select.selectByVisibleText(countryName);
+        return this;
+    }
+
+    public CheckOutPage selectState(String stateName) {
+        Select select = new Select(driver.findElement(stateDropDown));
+        select.selectByVisibleText(stateName);
         return this;
     }
 
@@ -79,8 +94,10 @@ public class CheckOutPage extends BasePage {
     public CheckOutPage setBillingAddress(BillingAddress billingAddress) {
         return enterTextIntoNameField(billingAddress.getFirstName())
                 .enterTextIntoLastNameField(billingAddress.getLastName())
+                .selectCountry(billingAddress.getCountry())
                 .enterTextIntoAddressField(billingAddress.getAddressLineOne())
                 .enterTextIntocityField(billingAddress.getCity())
+                .selectState(billingAddress.getState())
                 .enterTextIntoPostCodeField(billingAddress.getPostalCode())
                 .enterTextIntoEmailField(billingAddress.getEmail());
     }

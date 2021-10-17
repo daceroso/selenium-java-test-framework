@@ -8,14 +8,18 @@ public class BillingAddress {
     private String city;
     private String postalCode;
     private String email;
+    private String country;
+    private String state;
 
-    public BillingAddress(String firstName, String lastName, String addressLineOne, String city, String postalCode, String email) {
+    public BillingAddress(String firstName, String lastName, String addressLineOne, String city, String postalCode, String email, String country, String state) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.addressLineOne = addressLineOne;
         this.city = city;
         this.postalCode = postalCode;
         this.email = email;
+        this.country = country;
+        this.state = state;
     }
 
     public BillingAddress() {
@@ -49,6 +53,7 @@ public class BillingAddress {
         return this;
     }
 
+
     public String getCity() {
         return city;
     }
@@ -73,6 +78,24 @@ public class BillingAddress {
 
     public BillingAddress setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public BillingAddress setCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public BillingAddress setState(String state) {
+        this.state = state;
         return this;
     }
 }

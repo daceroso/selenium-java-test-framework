@@ -28,12 +28,14 @@ public class MainPageTest extends BaseTest {
 
         StorePage storePage = new HomePage(driver)
                 .load()
-                .navigateToStoreUsingMenu()
-                .search(searchFor);
+                .navigateToStoreUsingMenu();
+        storePage.isLoaded();
+        storePage.search(searchFor);
         assertThat(storePage.getTitle()).isEqualTo("Search results: “" + searchFor + "”");
 
         storePage.clickOnAddToCartBtn(product.getName());
         CartPage cartPage = storePage.clickOnViewCart();
+        cartPage.isLoaded();
         assertThat(cartPage.getProductName()).isEqualTo(product.getName());
 
         CheckOutPage checkOutpage = cartPage
@@ -48,7 +50,7 @@ public class MainPageTest extends BaseTest {
     }
 
     @Test
-    public void loginAndCheckoutUsingDirectBankTransfer() throws  IOException {
+    public void loginAndCheckoutUsingDirectBankTransfer() throws IOException {
 
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
@@ -73,7 +75,6 @@ public class MainPageTest extends BaseTest {
                 .login(user)
                 .setBillingAddress(billingAddress)
                 .clickOnPlaceOrderBtn();
-
 
 
         assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
