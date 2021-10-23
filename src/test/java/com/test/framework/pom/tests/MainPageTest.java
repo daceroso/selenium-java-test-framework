@@ -78,4 +78,15 @@ public class MainPageTest extends BaseTest {
 
         assertThat(checkOutpage.getNotice()).isEqualTo("Thank you. Your order has been received.");
     }
+
+
+
+
+
+
+
+       
+
+
+
 }

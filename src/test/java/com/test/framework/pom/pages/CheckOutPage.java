@@ -8,7 +8,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 
 public class CheckOutPage extends BasePage {
@@ -55,8 +54,8 @@ public class CheckOutPage extends BasePage {
     }
 
     public CheckOutPage selectCountry(String countryName) {
-//        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(countryDropDown)));
-//        select.selectByVisibleText(countryName);
+     //Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(countryDropDown)));
+       //select.selectByVisibleText(countryName);
 
         wait.until(ExpectedConditions.elementToBeClickable(alternateCountryDropDown)).click();
         WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
